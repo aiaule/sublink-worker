@@ -425,19 +425,6 @@ const applyPredefinedRulesFunction = () => `
       }
     });
   }
-
-  // Add event listeners to checkboxes
-  document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('.rule-checkbox');
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const predefinedSelect = document.getElementById('predefinedRules');
-        if (predefinedSelect.value !== 'custom') {
-          predefinedSelect.value = 'custom';
-        }
-      });
-    });
-  });
 `;
 
 const tooltipFunction = () => `
@@ -497,8 +484,7 @@ const submitFormFunction = () => `
       name: rule.querySelector('input[name="customRuleName[]"]').value,
       domain_suffix: rule.querySelector('input[name="customRuleDomainSuffix[]"]').value,
       domain_keyword: rule.querySelector('input[name="customRuleDomainKeyword[]"]').value,
-      ip_cidr: rule.querySelector('input[name="customRuleIPCIDR[]"]').value,
-      protocol: rule.querySelector('input[name="customRuleProtocol[]"]').value
+      ip_cidr: rule.querySelector('input[name="customRuleIPCIDR[]"]').value
     }));
 
     const configParam = configId ? \`&configId=\${configId}\` : '';
@@ -659,16 +645,6 @@ const customRuleFunctions = `
       <div class="mb-2">
         <label class="form-label">IP CIDR</label>
         <input type="text" class="form-control mb-2" name="customRuleIPCIDR[]" placeholder="IP CIDR (comma separated)">
-      </div>
-      <div class="mb-2">
-        <label class="form-label">Protocol</label>
-        <span class="tooltip-icon">
-          <i class="fas fa-question-circle"></i>
-          <span class="tooltip-content">
-            Protocol rules for specific traffic types. More details: https://sing-box.sagernet.org/configuration/route/sniff/
-          </span>
-        </span>
-        <input type="text" class="form-control mb-2" name="customRuleProtocol[]" placeholder="Protocol (comma separated, e.g, http,ssh,dns)">
       </div>
       <button type="button" class="btn btn-danger btn-sm" onclick="removeCustomRule(this)">Remove</button>
     \`;
